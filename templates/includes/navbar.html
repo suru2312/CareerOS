@@ -13,6 +13,10 @@
                     Welcome {{ user.username }}
                 </span>
 
+                <a class="nav-link" href="{% url 'profile_detail' %}">
+                    Profile
+                </a>
+
                 <a class="nav-link" href="{% url 'logout' %}">
                     Logout
                 </a>
