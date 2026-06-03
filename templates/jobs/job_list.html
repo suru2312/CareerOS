@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>My Applications</h2>
+
+<a
+    href="{% url 'job_create' %}"
+    class="btn btn-primary mb-3">
+
+    Add Job
+
+</a>
+
+<table class="table">
+
+    <thead>
+
+        <tr>
+
+            <th>Company</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th>Actions</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for job in jobs %}
+
+        <tr>
+
+            <td>{{ job.company_name }}</td>
+
+            <td>{{ job.position }}</td>
+
+            <td>{{ job.get_status_display }}</td>
+
+            <td>
+
+                <a
+                    href="{% url 'job_update' job.id %}"
+                    class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <a
+                    href="{% url 'job_delete' job.id %}"
+                    class="btn btn-danger btn-sm">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+
+            <td colspan="4">
+
+                No applications found.
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
