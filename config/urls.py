@@ -12,6 +12,7 @@ urlpatterns = [
     path('profile/', include('profiles.urls')),
     path('jobs/', include('jobs.urls')),
     path('resumes/', include('resumes.urls')),
+    path('interviews/', include('interviews.urls')),
 ]
 
 if settings.DEBUG:
