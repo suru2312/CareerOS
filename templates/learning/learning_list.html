@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>My Learning</h2>
+
+<a
+    href="{% url 'learning_create' %}"
+    class="btn btn-primary mb-3">
+
+    Add Learning Item
+
+</a>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Platform</th>
+            <th>Status</th>
+            <th>Progress</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for item in items %}
+
+        <tr>
+
+            <td>{{ item.title }}</td>
+
+            <td>{{ item.platform }}</td>
+
+            <td>{{ item.get_status_display }}</td>
+
+            <td>
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{ item.progress }}%;"
+                        aria-valuenow="{{ item.progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+
+                        {{ item.progress }}%
+
+                    </div>
+
+                </div>
+            </td>
+
+            <td>
+
+                <a
+                    href="{% url 'learning_update' item.id %}"
+                    class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <a
+                    href="{% url 'learning_delete' item.id %}"
+                    class="btn btn-danger btn-sm">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="5">
+                No learning items found.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
