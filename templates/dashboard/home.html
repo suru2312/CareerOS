@@ -4,6 +4,16 @@
 
 <h1>Welcome to CareerOS</h1>
 
-<p>Your personal career management platform.</p>
+{% if user.is_authenticated %}
+
+    <h3>Hello {{ user.username }}</h3>
+
+    <p>You are logged in.</p>
+
+{% else %}
+
+    <p>You are not logged in.</p>
+
+{% endif %}
 
 {% endblock %}
