@@ -38,5 +38,7 @@ def job_update(request, pk):
 @login_required
 def job_delete(request, pk):
     job = get_object_or_404(JobApplication, pk=pk, user=request.user)
-    job.delete()
-    return redirect('job_list')
+    if request.method == "POST":
+        job.delete()
+        return redirect('job_list')
+    return render(request, 'jobs/job_confirm_delete.html', {'job': job})

@@ -13,11 +13,17 @@ def home(request):
     interviews_count = Interview.objects.filter(user=request.user).count()
     goals_count = Goal.objects.filter(user=request.user).count()
     learning_count = LearningItem.objects.filter(user=request.user).count()
+    recent_goals = Goal.objects.filter(user=request.user).order_by('-created_at')[:5]
+    recent_interviews = Interview.objects.filter(user=request.user).order_by('-created_at')[:5]
+    recent_learning = LearningItem.objects.filter(user=request.user).order_by('-created_at')[:5]
     context = {
         "applications_count": applications_count,
         "interviews_count": interviews_count,
         "resumes_count": resumes_count,
         "goals_count": goals_count,
         "learning_count": learning_count,
+        "recent_goals": recent_goals,
+        "recent_interviews": recent_interviews,
+        "recent_learning": recent_learning,
     }
     return render(request, "dashboard/home.html", context)

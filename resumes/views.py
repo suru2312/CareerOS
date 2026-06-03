@@ -24,5 +24,7 @@ def resume_create(request):
 @login_required
 def resume_delete(request, pk):
     resume = get_object_or_404(Resume, pk=pk, user=request.user)
-    resume.delete()
-    return redirect('resume_list')
+    if request.method == "POST":
+        resume.delete()
+        return redirect('resume_list')
+    return render(request, 'resumes/resume_confirm_delete.html', {'resume': resume})

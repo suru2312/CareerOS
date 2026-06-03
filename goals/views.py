@@ -36,5 +36,7 @@ def goal_update(request, pk):
 @login_required
 def goal_delete(request, pk):
     goal = get_object_or_404(Goal, pk=pk, user=request.user)
-    goal.delete()
-    return redirect('goal_list')
+    if request.method == "POST":
+        goal.delete()
+        return redirect('goal_list')
+    return render(request, 'goals/goal_confirm_delete.html', {'goal': goal})

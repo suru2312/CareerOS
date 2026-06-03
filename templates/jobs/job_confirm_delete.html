@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Delete Job Application</h2>
+
+<div class="alert alert-danger">
+
+    Are you sure you want to delete:
+
+    <strong>
+        {{ job.company_name }}
+        -
+        {{ job.position }}
+    </strong>
+
+    ?
+
+</div>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="btn btn-danger">
+
+        Yes, Delete
+
+    </button>
+
+    <a
+        href="{% url 'job_list' %}"
+        class="btn btn-secondary">
+
+        Cancel
+
+    </a>
+
+</form>
+
+{% endblock %}

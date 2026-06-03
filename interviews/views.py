@@ -37,5 +37,7 @@ def interview_update(request, pk):
 @login_required
 def interview_delete(request, pk):
     interview = get_object_or_404(Interview, pk=pk, user=request.user)
-    interview.delete()
-    return redirect('interview_list')
+    if request.method == "POST":
+        interview.delete()
+        return redirect('interview_list')
+    return render(request, 'interviews/interview_confirm_delete.html', {'interview': interview})

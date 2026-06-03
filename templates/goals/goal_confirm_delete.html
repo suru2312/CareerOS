@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Delete Goal</h2>
+
+<div class="alert alert-danger">
+
+    Are you sure you want to delete:
+
+    <strong>
+        {{ goal.title }}
+    </strong>
+
+    ?
+
+</div>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="btn btn-danger">
+
+        Yes, Delete
+
+    </button>
+
+    <a
+        href="{% url 'goal_list' %}"
+        class="btn btn-secondary">
+
+        Cancel
+
+    </a>
+
+</form>
+
+{% endblock %}

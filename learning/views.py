@@ -36,5 +36,7 @@ def learning_update(request, pk):
 @login_required
 def learning_delete(request, pk):
     item = get_object_or_404(LearningItem, pk=pk, user=request.user)
-    item.delete()
-    return redirect('learning_list')
+    if request.method == "POST":
+        item.delete()
+        return redirect('learning_list')
+    return render(request, 'learning/learning_confirm_delete.html', {'item': item})
