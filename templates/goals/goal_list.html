@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>My Goals</h2>
+
+<a
+    href="{% url 'goal_create' %}"
+    class="btn btn-primary mb-3">
+
+    Add Goal
+
+</a>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Progress</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for goal in goals %}
+
+        <tr>
+
+            <td>{{ goal.title }}</td>
+
+            <td>{{ goal.get_status_display }}</td>
+
+            <td>{{ goal.get_priority_display }}</td>
+
+            <td>
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{ goal.progress }}%;"
+                        aria-valuenow="{{ goal.progress }}"
+                        aria-valuemin="0"
+                        aria-valuemax="100">
+
+                        {{ goal.progress }}%
+
+                    </div>
+
+                </div>
+            </td>
+
+            <td>
+
+                <a
+                    href="{% url 'goal_update' goal.id %}"
+                    class="btn btn-warning btn-sm">
+
+                    Edit
+
+                </a>
+
+                <a
+                    href="{% url 'goal_delete' goal.id %}"
+                    class="btn btn-danger btn-sm">
+
+                    Delete
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="5">
+                No goals found.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
