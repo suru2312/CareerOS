@@ -2,39 +2,122 @@
 
 {% block content %}
 
-<h2>My Profile</h2>
+<div class="profile-page">
 
-{% if profile.profile_picture %}
-    <img
-        src="{{ profile.profile_picture.url }}"
-        width="200"
-        class="img-thumbnail">
-{% endif %}
+    <div class="profile-card">
 
-<p><strong>Full Name:</strong> {{ profile.full_name }}</p>
+        <div class="profile-header">
 
-<p><strong>Phone:</strong> {{ profile.phone }}</p>
+            {% if profile.profile_picture %}
 
-<p><strong>Location:</strong> {{ profile.location }}</p>
+                <img
+                    src="{{ profile.profile_picture.url }}"
+                    class="profile-avatar">
 
-<p><strong>Bio:</strong> {{ profile.bio }}</p>
+            {% endif %}
 
-<p>
-    <strong>GitHub:</strong>
-    {{ profile.github_url }}
-</p>
+            <div>
 
-<p>
-    <strong>LinkedIn:</strong>
-    {{ profile.linkedin_url }}
-</p>
+                <div class="profile-name">
 
-<a
-    href="{% url 'profile_edit' %}"
-    class="btn btn-primary">
+                    {{ profile.full_name|default:request.user.username }}
 
-    Edit Profile
+                </div>
 
-</a>
+                <div class="profile-location">
+
+                    {{ profile.location|default:"Location not added" }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="profile-grid">
+
+            <div class="profile-info">
+
+                <label>Phone</label>
+
+                <p>
+                    {{ profile.phone|default:"Not provided" }}
+                </p>
+
+            </div>
+
+            <div class="profile-info">
+
+                <label>GitHub</label>
+
+                {% if profile.github_url %}
+
+                    <a
+                        href="{{ profile.github_url }}"
+                        target="_blank">
+
+                        Open GitHub
+
+                    </a>
+
+                {% else %}
+
+                    <p>Not provided</p>
+
+                {% endif %}
+
+            </div>
+
+            <div class="profile-info">
+
+                <label>LinkedIn</label>
+
+                {% if profile.linkedin_url %}
+
+                    <a
+                        href="{{ profile.linkedin_url }}"
+                        target="_blank">
+
+                        Open LinkedIn
+
+                    </a>
+
+                {% else %}
+
+                    <p>Not provided</p>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div class="profile-bio">
+
+            <h3>Bio</h3>
+
+            <p>
+
+                {{ profile.bio|default:"No bio added yet." }}
+
+            </p>
+
+        </div>
+
+        <div class="profile-actions">
+
+            <a
+                href="{% url 'profile_edit' %}"
+                class="btn btn-primary">
+
+                Edit Profile
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 
 {% endblock %}

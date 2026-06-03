@@ -1,0 +1,99 @@
+/* ── Tablet ── */
+
+@media (max-width: 1024px) {
+  .content-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .content-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 768px) {
+
+  /* Sidebar hides off-screen on mobile, shown via JS */
+  .sidebar {
+    transform: translateX(-100%);
+    width: var(--sidebar-width) !important; /* always full width when open on mobile */
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  /* Main wrapper takes full width */
+  .main-wrapper {
+    margin-left: 0 !important;
+  }
+
+  /* Show toggle button */
+  .sidebar-toggle {
+    display: flex;
+  }
+
+  /* Page content padding */
+  .page-content {
+    padding: 18px 16px;
+  }
+
+  /* Topbar */
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .topbar-username {
+    display: none;
+  }
+
+  /* Grids */
+  .content-grid-2,
+  .content-grid-3,
+  .content-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Page header */
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Tables */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Cards */
+  .stat-card {
+    padding: 16px 18px;
+  }
+
+  /* Footer */
+  .app-footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 4px;
+    padding: 14px 16px;
+  }
+
+  /* Auth */
+  .auth-card {
+    padding: 28px 22px;
+    margin: 16px;
+  }
+
+  /* Messages toast */
+  .messages-wrapper {
+    right: 12px;
+    left: 12px;
+    max-width: unset;
+  }
+}
+
+/* ── Large desktop ── */
+
+@media (min-width: 1280px) {
+  .page-content {
+    padding: 32px 36px;
+  }
+}

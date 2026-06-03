@@ -2,81 +2,121 @@
 
 {% block content %}
 
-<h2>My Applications</h2>
+<div class="table-page">
 
-<a
-    href="{% url 'job_create' %}"
-    class="btn btn-primary mb-3">
+    <div class="table-header">
 
-    Add Job
+        <h1 class="table-title">
+            Job Applications
+        </h1>
 
-</a>
+        <a href="{% url 'job_create' %}" class="btn btn-primary">
+            Add Job
+        </a>
 
-<table class="table">
+    </div>
 
-    <thead>
+    <div class="table-card">
 
-        <tr>
+        <table class="custom-table">
 
-            <th>Company</th>
-            <th>Position</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Position</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
 
-        </tr>
+            <tbody>
 
-    </thead>
+                {% for job in jobs %}
 
-    <tbody>
+                <tr>
 
-        {% for job in jobs %}
+                    <td>{{ job.company_name }}</td>
 
-        <tr>
+                    <td>{{ job.position }}</td>
 
-            <td>{{ job.company_name }}</td>
+                    <td>
 
-            <td>{{ job.position }}</td>
+                        {% if job.status == 'applied' %}
 
-            <td>{{ job.get_status_display }}</td>
+                            <span class="badge badge-applied">
+                                Applied
+                            </span>
 
-            <td>
+                        {% elif job.status == 'interview' %}
 
-                <a
-                    href="{% url 'job_update' job.id %}"
-                    class="btn btn-warning btn-sm">
+                            <span class="badge badge-interview">
+                                Interview
+                            </span>
 
-                    Edit
+                        {% elif job.status == 'offer' %}
 
-                </a>
+                            <span class="badge badge-offer">
+                                Offer
+                            </span>
 
-                <a
-                    href="{% url 'job_delete' job.id %}"
-                    class="btn btn-danger btn-sm">
+                        {% else %}
 
-                    Delete
+                            <span class="badge badge-rejected">
+                                Rejected
+                            </span>
 
-                </a>
+                        {% endif %}
 
-            </td>
+                    </td>
 
-        </tr>
+                    <td>
 
-        {% empty %}
+                        <div class="actions">
 
-        <tr>
+                            <a href="{% url 'job_update' job.id %}"
+                               class="btn btn-primary">
 
-            <td colspan="4">
+                                Edit
 
-                No applications found.
+                            </a>
 
-            </td>
+                            <a href="{% url 'job_delete' job.id %}"
+                               class="btn btn-danger">
 
-        </tr>
+                                Delete
 
-        {% endfor %}
+                            </a>
 
-    </tbody>
+                        </div>
 
-</table>
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4">
+
+                        <div class="empty-state">
+
+                            No applications found.
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 {% endblock %}

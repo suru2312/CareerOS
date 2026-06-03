@@ -2,92 +2,182 @@
 
 {% block content %}
 
-<h2>My Goals</h2>
+<div class="table-page">
 
-<a
-    href="{% url 'goal_create' %}"
-    class="btn btn-primary mb-3">
+    <div class="table-header">
 
-    Add Goal
+        <h1 class="table-title">
 
-</a>
+            Goals
 
-<table class="table">
+        </h1>
 
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Status</th>
-            <th>Priority</th>
-            <th>Progress</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+        <a
+            href="{% url 'goal_create' %}"
+            class="btn btn-primary">
 
-    <tbody>
+            Add Goal
 
-        {% for goal in goals %}
+        </a>
 
-        <tr>
+    </div>
 
-            <td>{{ goal.title }}</td>
+    <div class="table-card">
 
-            <td>{{ goal.get_status_display }}</td>
+        <table class="custom-table">
 
-            <td>{{ goal.get_priority_display }}</td>
+            <thead>
 
-            <td>
-                <div class="progress">
+                <tr>
 
-                    <div
-                        class="progress-bar"
-                        role="progressbar"
-                        style="width: {{ goal.progress }}%;"
-                        aria-valuenow="{{ goal.progress }}"
-                        aria-valuemin="0"
-                        aria-valuemax="100">
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Progress</th>
+                    <th>Actions</th>
 
-                        {{ goal.progress }}%
+                </tr>
 
-                    </div>
+            </thead>
 
-                </div>
-            </td>
+            <tbody>
 
-            <td>
+                {% for goal in goals %}
 
-                <a
-                    href="{% url 'goal_update' goal.id %}"
-                    class="btn btn-warning btn-sm">
+                <tr>
 
-                    Edit
+                    <td>
 
-                </a>
+                        {{ goal.title }}
 
-                <a
-                    href="{% url 'goal_delete' goal.id %}"
-                    class="btn btn-danger btn-sm">
+                    </td>
 
-                    Delete
+                    <td>
 
-                </a>
+                    {% if goal.status == 'pending' %}
 
-            </td>
+                        <span class="badge badge-pending">
 
-        </tr>
+                            Pending
 
-        {% empty %}
+                        </span>
 
-        <tr>
-            <td colspan="5">
-                No goals found.
-            </td>
-        </tr>
+                    {% elif goal.status == 'in_progress' %}
 
-        {% endfor %}
+                        <span class="badge badge-progress">
 
-    </tbody>
+                            In Progress
 
-</table>
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge badge-success">
+
+                            Completed
+
+                        </span>
+
+                    {% endif %}
+
+                    </td>
+
+                    <td>
+
+                    {% if goal.priority == 'high' %}
+
+                        <span class="badge badge-danger">
+
+                            High
+
+                        </span>
+
+                    {% elif goal.priority == 'medium' %}
+
+                        <span class="badge badge-warning">
+
+                            Medium
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge badge-success">
+
+                            Low
+
+                        </span>
+
+                    {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-fill"
+                                style="width: {{ goal.progress }}%;">
+
+                            </div>
+
+                        </div>
+
+                        <small>
+
+                            {{ goal.progress }}%
+
+                        </small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <a
+                                href="{% url 'goal_update' goal.id %}"
+                                class="btn btn-primary">
+
+                                Edit
+
+                            </a>
+
+                            <a
+                                href="{% url 'goal_delete' goal.id %}"
+                                class="btn btn-danger">
+
+                                Delete
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5">
+
+                        No goals found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 {% endblock %}

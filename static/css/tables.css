@@ -1,0 +1,177 @@
+.table-page {
+
+    width: 100%;
+}
+
+.table-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+.table-title {
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+.table-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+}
+
+.custom-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.custom-table thead {
+
+    background: #f9fafb;
+}
+
+.custom-table th {
+
+    text-align: left;
+
+    padding: 18px;
+
+    font-weight: 600;
+
+    color: var(--text);
+}
+
+.custom-table td {
+
+    padding: 18px;
+
+    border-top: 1px solid var(--border);
+}
+
+.custom-table tbody tr {
+
+    transition: all .2s ease;
+}
+
+.custom-table tbody tr:hover {
+
+    background: #f8fafc;
+}
+
+.actions {
+
+    display: flex;
+
+    gap: 10px;
+}
+
+.badge {
+
+    padding: 6px 12px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.badge-success {
+
+    background: #d1fae5;
+
+    color: #065f46;
+}
+
+.badge-warning {
+
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+.badge-danger {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+.badge {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.badge-pending {
+
+    background: #fef3c7;
+
+    color: #92400e;
+}
+
+.badge-progress {
+
+    background: #dbeafe;
+
+    color: #1e40af;
+}
+
+.badge-success {
+
+    background: #d1fae5;
+
+    color: #065f46;
+}
+
+.badge-danger {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+.badge-applied{
+
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+.badge-interview{
+
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.badge-offer{
+
+    background:#d1fae5;
+    color:#065f46;
+}
+
+.badge-rejected{
+
+    background:#fee2e2;
+    color:#991b1b;
+}

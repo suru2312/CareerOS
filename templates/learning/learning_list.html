@@ -2,92 +2,141 @@
 
 {% block content %}
 
-<h2>My Learning</h2>
+<div class="table-page">
 
-<a
-    href="{% url 'learning_create' %}"
-    class="btn btn-primary mb-3">
+    <div class="table-header">
 
-    Add Learning Item
+        <h1 class="table-title">
+            Learning Tracker
+        </h1>
 
-</a>
+        <a href="{% url 'learning_create' %}"
+           class="btn btn-primary">
 
-<table class="table">
+            Add Learning Item
 
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Platform</th>
-            <th>Status</th>
-            <th>Progress</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+        </a>
 
-    <tbody>
+    </div>
 
-        {% for item in items %}
+    <div class="table-card">
 
-        <tr>
+        <table class="custom-table">
 
-            <td>{{ item.title }}</td>
+            <thead>
 
-            <td>{{ item.platform }}</td>
+                <tr>
+                    <th>Title</th>
+                    <th>Platform</th>
+                    <th>Status</th>
+                    <th>Progress</th>
+                    <th>Actions</th>
+                </tr>
 
-            <td>{{ item.get_status_display }}</td>
+            </thead>
 
-            <td>
-                <div class="progress">
+            <tbody>
 
-                    <div
-                        class="progress-bar"
-                        role="progressbar"
-                        style="width: {{ item.progress }}%;"
-                        aria-valuenow="{{ item.progress }}"
-                        aria-valuemin="0"
-                        aria-valuemax="100">
+                {% for item in items %}
 
-                        {{ item.progress }}%
+                <tr>
 
-                    </div>
+                    <td>{{ item.title }}</td>
 
-                </div>
-            </td>
+                    <td>{{ item.platform }}</td>
 
-            <td>
+                    <td>
 
-                <a
-                    href="{% url 'learning_update' item.id %}"
-                    class="btn btn-warning btn-sm">
+                        {% if item.status == 'completed' %}
 
-                    Edit
+                            <span class="badge badge-success">
+                                Completed
+                            </span>
 
-                </a>
+                        {% elif item.status == 'in_progress' %}
 
-                <a
-                    href="{% url 'learning_delete' item.id %}"
-                    class="btn btn-danger btn-sm">
+                            <span class="badge badge-progress">
+                                In Progress
+                            </span>
 
-                    Delete
+                        {% else %}
 
-                </a>
+                            <span class="badge badge-pending">
+                                Not Started
+                            </span>
 
-            </td>
+                        {% endif %}
 
-        </tr>
+                    </td>
 
-        {% empty %}
+                    <td>
 
-        <tr>
-            <td colspan="5">
-                No learning items found.
-            </td>
-        </tr>
+                        <div class="progress">
 
-        {% endfor %}
+                            <div
+                                class="progress-fill"
+                                style="width: {{ item.progress }}%;">
 
-    </tbody>
+                            </div>
 
-</table>
+                        </div>
+
+                        <small>
+
+                            {{ item.progress }}%
+
+                        </small>
+
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <a href="{% url 'learning_update' item.id %}"
+                               class="btn btn-primary">
+
+                                Edit
+
+                            </a>
+
+                            <a href="{% url 'learning_delete' item.id %}"
+                               class="btn btn-danger">
+
+                                Delete
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5">
+
+                        <div class="empty-state">
+
+                            No learning items found.
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 {% endblock %}

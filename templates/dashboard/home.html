@@ -2,198 +2,183 @@
 
 {% block content %}
 
-<div class="container">
+<h1 class="page-title">
 
-    <h2 class="mb-4">
-        Welcome {{ request.user.username }} 👋
-    </h2>
+    Welcome {{ request.user.username }} 👋
 
-    <!-- Stats Cards -->
+</h1>
 
-    <div class="row g-3 mb-4">
+<div class="stats-grid">
 
-        <div class="col-md-2">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h6>Applications</h6>
-                    <h3>{{ applications_count }}</h3>
-                </div>
-            </div>
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Applications
         </div>
 
-        <div class="col-md-2">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h6>Interviews</h6>
-                    <h3>{{ interviews_count }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-2">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h6>Resumes</h6>
-                    <h3>{{ resumes_count }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h6>Goals</h6>
-                    <h3>{{ goals_count }}</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="card text-center shadow-sm">
-                <div class="card-body">
-                    <h6>Learning</h6>
-                    <h3>{{ learning_count }}</h3>
-                </div>
-            </div>
+        <div class="stat-number">
+            {{ applications_count }}
         </div>
 
     </div>
 
-    <!-- Recent Goals -->
+    <div class="stat-card">
 
-    <div class="card shadow-sm mb-4">
-
-        <div class="card-header">
-            <strong>🎯 Recent Goals</strong>
+        <div class="stat-label">
+            Interviews
         </div>
 
-        <div class="card-body">
+        <div class="stat-number">
+            {{ interviews_count }}
+        </div>
 
-            {% if recent_goals %}
+    </div>
 
-                {% for goal in recent_goals %}
+    <div class="stat-card">
 
-                    <div class="mb-3">
+        <div class="stat-label">
+            Resumes
+        </div>
 
-                        <strong>{{ goal.title }}</strong>
+        <div class="stat-number">
+            {{ resumes_count }}
+        </div>
 
-                        <div class="progress mt-1">
+    </div>
 
-                            <div
-                                class="progress-bar"
-                                role="progressbar"
-                                style="width: {{ goal.progress }}%;">
+    <div class="stat-card">
 
-                                {{ goal.progress }}%
+        <div class="stat-label">
+            Goals
+        </div>
 
-                            </div>
+        <div class="stat-number">
+            {{ goals_count }}
+        </div>
 
-                        </div>
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Learning
+        </div>
+
+        <div class="stat-number">
+            {{ learning_count }}
+        </div>
+
+    </div>
+
+</div>
+
+<div class="content-grid">
+
+    <div class="dashboard-panel">
+
+        <div class="panel-title">
+
+            🎯 Recent Goals
+
+        </div>
+
+        {% for goal in recent_goals %}
+
+            <div class="goal-item">
+
+                <div class="goal-title">
+
+                    {{ goal.title }}
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-fill"
+                        style="width: {{ goal.progress }}%;">
 
                     </div>
 
-                {% endfor %}
+                </div>
 
-            {% else %}
+            </div>
 
-                <p>No goals added yet.</p>
+        {% empty %}
 
-            {% endif %}
+            <p>No goals yet.</p>
 
-        </div>
-
-    </div>
-
-    <!-- Recent Interviews -->
-
-    <div class="card shadow-sm mb-4">
-
-        <div class="card-header">
-            <strong>🎤 Recent Interviews</strong>
-        </div>
-
-        <div class="card-body">
-
-            {% if recent_interviews %}
-
-                <ul class="list-group">
-
-                    {% for interview in recent_interviews %}
-
-                        <li class="list-group-item">
-
-                            <strong>
-                                {{ interview.company_name }}
-                            </strong>
-
-                            -
-                            {{ interview.round_name }}
-
-                            <span class="float-end">
-                                {{ interview.get_result_display }}
-                            </span>
-
-                        </li>
-
-                    {% endfor %}
-
-                </ul>
-
-            {% else %}
-
-                <p>No interviews added yet.</p>
-
-            {% endif %}
-
-        </div>
+        {% endfor %}
 
     </div>
 
-    <!-- Recent Learning -->
+    <div class="dashboard-panel">
 
-    <div class="card shadow-sm mb-4">
+        <div class="panel-title">
 
-        <div class="card-header">
-            <strong>📚 Recent Learning</strong>
+            🎤 Recent Interviews
+
         </div>
 
-        <div class="card-body">
+        {% for interview in recent_interviews %}
 
-            {% if recent_learning %}
+            <div class="list-item">
 
-                <ul class="list-group">
+                <strong>
+                    {{ interview.company_name }}
+                </strong>
 
-                    {% for item in recent_learning %}
+                <br>
 
-                        <li class="list-group-item">
+                {{ interview.round_name }}
 
-                            <strong>
-                                {{ item.title }}
-                            </strong>
+            </div>
 
-                            {% if item.platform %}
-                                ({{ item.platform }})
-                            {% endif %}
+        {% empty %}
 
-                            <span class="float-end">
-                                {{ item.progress }}%
-                            </span>
+            <p>No interviews yet.</p>
 
-                        </li>
+        {% endfor %}
 
-                    {% endfor %}
+    </div>
 
-                </ul>
+</div>
 
-            {% else %}
+<br>
 
-                <p>No learning items added yet.</p>
+<div class="dashboard-panel">
+
+    <div class="panel-title">
+
+        📚 Recent Learning
+
+    </div>
+
+    {% for item in recent_learning %}
+
+        <div class="list-item">
+
+            <strong>
+                {{ item.title }}
+            </strong>
+
+            {% if item.platform %}
+
+                - {{ item.platform }}
 
             {% endif %}
 
+            <br>
+
+            Progress: {{ item.progress }}%
+
         </div>
 
-    </div>
+    {% empty %}
+
+        <p>No learning items yet.</p>
+
+    {% endfor %}
 
 </div>
 

@@ -2,82 +2,106 @@
 
 {% block content %}
 
-<h2>My Resumes</h2>
+<div class="table-page">
 
-<a
-    href="{% url 'resume_create' %}"
-    class="btn btn-primary mb-3">
+    <div class="table-header">
 
-    Upload Resume
+        <h1 class="table-title">
+            My Resumes
+        </h1>
 
-</a>
+        <a href="{% url 'resume_create' %}"
+           class="btn btn-primary">
 
-<table class="table">
+            Upload Resume
 
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Resume</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+        </a>
 
-    <tbody>
+    </div>
 
-        {% for resume in resumes %}
+    <div class="table-card">
 
-        <tr>
+        <table class="custom-table">
 
-            <td>{{ resume.title }}</td>
+            <thead>
 
-            <td>
+                <tr>
+                    <th>Title</th>
+                    <th>Resume</th>
+                    <th>Actions</th>
+                </tr>
 
-                <a
-                    href="{{ resume.resume_file.url }}"
-                    target="_blank"
-                    class="btn btn-info btn-sm">
+            </thead>
 
-                    Open
+            <tbody>
 
-                </a>
+                {% for resume in resumes %}
 
-                <a
-                    href="{{ resume.resume_file.url }}"
-                    download
-                    class="btn btn-secondary btn-sm">
+                <tr>
 
-                    Download
+                    <td>{{ resume.title }}</td>
 
-                </a>
+                    <td>
 
-            </td>
+                        <div class="actions">
 
-            <td>
+                            <a href="{{ resume.resume_file.url }}"
+                               target="_blank"
+                               class="btn btn-success">
 
-                <a
-                    href="{% url 'resume_delete' resume.id %}"
-                    class="btn btn-danger btn-sm">
+                                Open
 
-                    Delete
+                            </a>
 
-                </a>
+                            <a href="{{ resume.resume_file.url }}"
+                               download
+                               class="btn btn-secondary">
 
-            </td>
+                                Download
 
-        </tr>
+                            </a>
 
-        {% empty %}
+                        </div>
 
-        <tr>
-            <td colspan="3">
-                No resumes uploaded.
-            </td>
-        </tr>
+                    </td>
 
-        {% endfor %}
+                    <td>
 
-    </tbody>
+                        <a href="{% url 'resume_delete' resume.id %}"
+                           class="btn btn-danger">
 
-</table>
+                            Delete
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="3">
+
+                        <div class="empty-state">
+
+                            No resumes uploaded.
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
 
 {% endblock %}

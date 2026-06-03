@@ -1,0 +1,73 @@
+<div class="sidebar">
+
+    <div class="sidebar-logo">
+
+        🚀 CareerOS
+
+    </div>
+
+    <div class="sidebar-menu">
+
+        <a href="/">
+            🏠 Dashboard
+        </a>
+
+        <a href="{% url 'job_list' %}">
+            💼 Jobs
+        </a>
+
+        <a href="{% url 'resume_list' %}">
+            📄 Resumes
+        </a>
+
+        <a href="{% url 'interview_list' %}">
+            🎤 Interviews
+        </a>
+
+        <a href="{% url 'goal_list' %}">
+            🎯 Goals
+        </a>
+
+        <a href="{% url 'learning_list' %}">
+            📚 Learning
+        </a>
+
+        <a href="{% url 'profile_detail' %}">
+            👤 Profile
+        </a>
+
+    </div>
+
+    <div class="sidebar-footer">
+
+        <div class="user-info">
+
+            Logged in as
+
+            <br>
+
+            <strong>
+                {{ request.user.username }}
+            </strong>
+
+        </div>
+
+        <form
+            method="POST"
+            action="{% url 'logout' %}">
+
+            {% csrf_token %}
+
+            <button
+                class="btn btn-danger"
+                type="submit">
+
+                Logout
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

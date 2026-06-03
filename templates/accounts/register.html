@@ -2,17 +2,57 @@
 
 {% block content %}
 
-<div class="row justify-content-center">
+<div class="auth-container">
 
-    <div class="col-md-6">
+    <div class="auth-card">
 
-        <h2>Register</h2>
+        <div class="auth-logo">
+
+            CareerOS
+
+        </div>
+
+        <h2 class="auth-title">
+
+            Create Account
+
+        </h2>
+
+        <p class="auth-subtitle">
+
+            Start organizing your career today
+
+        </p>
 
         <form method="POST">
 
             {% csrf_token %}
 
-            {{ form.as_p }}
+            {% for field in form %}
+
+                <div class="form-group">
+
+                    <label class="form-label">
+
+                        {{ field.label }}
+
+                    </label>
+
+                    {{ field }}
+
+                    {% for error in field.errors %}
+
+                        <div class="error-text">
+
+                            {{ error }}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
 
             <button
                 type="submit"
@@ -23,6 +63,18 @@
             </button>
 
         </form>
+
+        <div class="auth-footer">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+
+                Login
+
+            </a>
+
+        </div>
 
     </div>
 
