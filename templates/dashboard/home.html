@@ -2,18 +2,70 @@
 
 {% block content %}
 
-<h1>Welcome to CareerOS</h1>
+<h2>
+    Welcome {{ request.user.username }} 👋
+</h2>
 
-{% if user.is_authenticated %}
+<hr>
 
-    <h3>Hello {{ user.username }}</h3>
+<div class="row">
 
-    <p>You are logged in.</p>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
 
-{% else %}
+                <h5>Applications</h5>
 
-    <p>You are not logged in.</p>
+                <h2>
+                    {{ applications_count }}
+                </h2>
 
-{% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+
+                <h5>Interviews</h5>
+
+                <h2>
+                    {{ interviews_count }}
+                </h2>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+
+                <h5>Goals</h5>
+
+                <h2>
+                    {{ goals_count }}
+                </h2>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+
+                <h5>Learning</h5>
+
+                <h2>
+                    {{ learning_count }}
+                </h2>
+
+            </div>
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}
