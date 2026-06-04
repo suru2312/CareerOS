@@ -219,6 +219,6 @@ The application is deployed on Render using:
 
 Python Developer | Django Developer
 
-GitHub: https://github.com/your-github-username
+GitHub: https://github.com/suru2312
 
-LinkedIn: https://linkedin.com/in/your-linkedin-profile
+LinkedIn: https://linkedin.com/in/suraj2312
