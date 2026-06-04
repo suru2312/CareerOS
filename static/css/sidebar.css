@@ -82,3 +82,60 @@
 
     margin-bottom: 15px;
 }
+
+.sidebar-menu a.active {
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+
+    font-weight: 600;
+}
+
+.menu-toggle {
+
+    display: none;
+
+    background: var(--primary);
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 16px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+    cursor: pointer;
+}
+
+.sidebar-heading {
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #6b7280;
+
+    margin-top: 20px;
+
+    margin-bottom: 10px;
+
+    text-transform: uppercase;
+}
+
+.sidebar-section {
+
+    margin-bottom: 10px;
+}
+
+.sidebar-logo {
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
