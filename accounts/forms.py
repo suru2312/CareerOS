@@ -38,6 +38,7 @@ class RegisterForm(UserCreationForm):
         }
 
     password1 = forms.CharField(
+        label="Password",
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Create a password",
@@ -47,6 +48,7 @@ class RegisterForm(UserCreationForm):
     )
 
     password2 = forms.CharField(
+        label="Confirm Password",
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Confirm your password",
