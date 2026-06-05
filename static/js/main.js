@@ -40,7 +40,6 @@
     const bars = document.querySelectorAll('.progress-bar[data-value]');
     bars.forEach(function (bar) {
       const value = parseInt(bar.getAttribute('data-value'), 10) || 0;
-      // Small delay so transition is visible
       setTimeout(function () {
         bar.style.width = Math.min(Math.max(value, 0), 100) + '%';
       }, 100);

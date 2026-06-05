@@ -1,41 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h2>Delete Resume</h2>
-
-<div class="alert alert-danger">
-
-    Are you sure you want to delete:
-
-    <strong>
-        {{ resume.title }}
-    </strong>
-
-    ?
-
+<div class="delete-page">
+    <div class="delete-card">
+        <span class="delete-icon">🗑️</span>
+        <div class="delete-title">Delete Resume</div>
+        <p class="delete-text">
+            Are you sure you want to delete<br>
+            <strong>{{ resume.title }}</strong>?<br>
+            This action cannot be undone.
+        </p>
+        <div class="delete-actions">
+            <form method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            </form>
+            <a href="{% url 'resume_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
 </div>
-
-<form method="POST">
-
-    {% csrf_token %}
-
-    <button
-        type="submit"
-        class="btn btn-danger">
-
-        Yes, Delete
-
-    </button>
-
-    <a
-        href="{% url 'resume_list' %}"
-        class="btn btn-secondary">
-
-        Cancel
-
-    </a>
-
-</form>
-
 {% endblock %}

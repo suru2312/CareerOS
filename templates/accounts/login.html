@@ -1,83 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="auth-container">
-
     <div class="auth-card">
 
-        <div class="auth-logo">
-
-            CareerOS
-
-        </div>
-
-        <h2 class="auth-title">
-
-            Welcome Back
-
-        </h2>
-
-        <p class="auth-subtitle">
-
-            Sign in to continue your career journey
-
-        </p>
+        <div class="auth-logo">CareerOS</div>
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Sign in to continue your career journey</p>
 
         <form method="POST">
-
             {% csrf_token %}
-
             {% for field in form %}
-
                 <div class="form-group">
-
-                    <label class="form-label">
-
-                        {{ field.label }}
-
-                    </label>
-
+                    <label class="form-label">{{ field.label }}</label>
                     {{ field }}
-
                     {% for error in field.errors %}
-
-                        <div class="error-text">
-
-                            {{ error }}
-
-                        </div>
-
+                        <div class="error-text">{{ error }}</div>
                     {% endfor %}
-
                 </div>
-
             {% endfor %}
-
-            <button
-                type="submit"
-                class="btn btn-primary">
-
-                Login
-
-            </button>
-
+            <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
 
         <div class="auth-footer">
-
-            Don't have an account?
-
-            <a href="{% url 'register' %}">
-
-                Register
-
-            </a>
-
+            Don't have an account? <a href="{% url 'register' %}">Create one</a>
         </div>
 
     </div>
-
 </div>
-
 {% endblock %}

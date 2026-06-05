@@ -1,25 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="table-page">
-
     <div class="table-header">
-
-        <h1 class="table-title">
-            Job Applications
-        </h1>
-
-        <a href="{% url 'job_create' %}" class="btn btn-primary">
-            Add Job
-        </a>
-
+        <h1 class="table-title">💼 Job Applications</h1>
+        <a href="{% url 'job_create' %}" class="btn btn-primary">+ Add Job</a>
     </div>
 
     <div class="table-card">
-
         <table class="custom-table">
-
             <thead>
                 <tr>
                     <th>Company</th>
@@ -28,95 +17,41 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-
             <tbody>
-
                 {% for job in jobs %}
-
                 <tr>
-
                     <td>{{ job.company_name }}</td>
-
                     <td>{{ job.position }}</td>
-
                     <td>
-
                         {% if job.status == 'applied' %}
-
-                            <span class="badge badge-applied">
-                                Applied
-                            </span>
-
+                            <span class="badge badge-applied">Applied</span>
                         {% elif job.status == 'interview' %}
-
-                            <span class="badge badge-interview">
-                                Interview
-                            </span>
-
+                            <span class="badge badge-interview">Interview</span>
                         {% elif job.status == 'offer' %}
-
-                            <span class="badge badge-offer">
-                                Offer
-                            </span>
-
+                            <span class="badge badge-offer">Offer</span>
                         {% else %}
-
-                            <span class="badge badge-rejected">
-                                Rejected
-                            </span>
-
+                            <span class="badge badge-rejected">Rejected</span>
                         {% endif %}
-
                     </td>
-
                     <td>
-
                         <div class="actions">
-
-                            <a href="{% url 'job_update' job.id %}"
-                               class="btn btn-primary">
-
-                                Edit
-
-                            </a>
-
-                            <a href="{% url 'job_delete' job.id %}"
-                               class="btn btn-danger">
-
-                                Delete
-
-                            </a>
-
+                            <a href="{% url 'job_update' job.id %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'job_delete' job.id %}" class="btn btn-danger">Delete</a>
                         </div>
-
                     </td>
-
                 </tr>
-
                 {% empty %}
-
                 <tr>
-
                     <td colspan="4">
-
                         <div class="empty-state">
-
-                            No applications found.
-
+                            <h3>No applications yet</h3>
+                            <p>Start tracking your job hunt.</p>
                         </div>
-
                     </td>
-
                 </tr>
-
                 {% endfor %}
-
             </tbody>
-
         </table>
-
     </div>
-
 </div>
-
 {% endblock %}

@@ -3,253 +3,95 @@
 {% block content %}
 
 <h1 class="page-title">
-
-    Welcome {{ request.user.username }} 👋
-
+    Welcome back, <span>{{ request.user.username }}</span> 👋
 </h1>
 
 <div class="stats-grid">
-
     <div class="stat-card">
-
         <div class="stat-content">
-
-            <div class="stat-label">
-
-                Applications
-
-            </div>
-
-            <div class="stat-number">
-
-                {{ applications_count }}
-
-            </div>
-
+            <div class="stat-label">Applications</div>
+            <div class="stat-number">{{ applications_count }}</div>
         </div>
-
-        <div class="stat-icon">
-
-            💼
-
-        </div>
-
+        <div class="stat-icon">💼</div>
     </div>
-
     <div class="stat-card">
-
         <div class="stat-content">
-
-            <div class="stat-label">
-
-                Interviews
-
-            </div>
-
-            <div class="stat-number">
-
-                {{ interviews_count }}
-
-            </div>
-
+            <div class="stat-label">Interviews</div>
+            <div class="stat-number">{{ interviews_count }}</div>
         </div>
-
-        <div class="stat-icon">
-
-            🎤
-
-        </div>
-
+        <div class="stat-icon">🎤</div>
     </div>
-
     <div class="stat-card">
-
         <div class="stat-content">
-
-            <div class="stat-label">
-
-                Resumes
-
-            </div>
-
-            <div class="stat-number">
-
-                {{ resumes_count }}
-
-            </div>
-
+            <div class="stat-label">Resumes</div>
+            <div class="stat-number">{{ resumes_count }}</div>
         </div>
-
-        <div class="stat-icon">
-
-            📄
-
-        </div>
-
+        <div class="stat-icon">📄</div>
     </div>
-
     <div class="stat-card">
-
         <div class="stat-content">
-
-            <div class="stat-label">
-
-                Goals
-
-            </div>
-
-            <div class="stat-number">
-
-                {{ goals_count }}
-
-            </div>
-
+            <div class="stat-label">Goals</div>
+            <div class="stat-number">{{ goals_count }}</div>
         </div>
-
-        <div class="stat-icon">
-
-            🎯
-
-        </div>
-
+        <div class="stat-icon">🎯</div>
     </div>
-
     <div class="stat-card">
-
         <div class="stat-content">
-
-            <div class="stat-label">
-
-                Learning
-
-            </div>
-
-            <div class="stat-number">
-
-                {{ learning_count }}
-
-            </div>
-
+            <div class="stat-label">Learning</div>
+            <div class="stat-number">{{ learning_count }}</div>
         </div>
-
-        <div class="stat-icon">
-
-            📚
-
-        </div>
-
+        <div class="stat-icon">📚</div>
     </div>
-
 </div>
 
 <div class="content-grid">
-
     <div class="dashboard-panel">
-
-        <div class="panel-title">
-
-            🎯 Recent Goals
-
-        </div>
-
+        <div class="panel-title">🎯 Recent Goals</div>
         {% for goal in recent_goals %}
-
             <div class="goal-item">
-
                 <div class="goal-title">
-
-                    {{ goal.title }}
-
+                    <span>{{ goal.title }}</span>
+                    <small style="color:var(--text-muted)">{{ goal.progress }}%</small>
                 </div>
-
                 <div class="progress">
-
-                    <div
-                        class="progress-fill"
-                        style="width: {{ goal.progress }}%;">
-
-                    </div>
-
+                    <div class="progress-fill" style="width: {{ goal.progress }}%;"></div>
                 </div>
-
             </div>
-
         {% empty %}
-
-            <p>No goals yet.</p>
-
+            <div class="empty-state"><p>No goals yet.</p></div>
         {% endfor %}
-
     </div>
 
     <div class="dashboard-panel">
-
-        <div class="panel-title">
-
-            🎤 Recent Interviews
-
-        </div>
-
+        <div class="panel-title">🎤 Recent Interviews</div>
         {% for interview in recent_interviews %}
-
             <div class="list-item">
-
-                <strong>
-                    {{ interview.company_name }}
-                </strong>
-
-                <br>
-
-                {{ interview.round_name }}
-
+                <strong>{{ interview.company_name }}</strong>
+                <span style="display:block;color:var(--text-muted);font-size:13px;margin-top:2px;">{{ interview.round_name }}</span>
             </div>
-
         {% empty %}
-
-            <p>No interviews yet.</p>
-
+            <div class="empty-state"><p>No interviews yet.</p></div>
         {% endfor %}
-
     </div>
-
 </div>
 
-<br>
-
 <div class="dashboard-panel">
-
-    <div class="panel-title">
-
-        📚 Recent Learning
-
-    </div>
-
+    <div class="panel-title">📚 Recent Learning</div>
     {% for item in recent_learning %}
-
         <div class="list-item">
-
-            <strong>
-                {{ item.title }}
-            </strong>
-
+            <strong>{{ item.title }}</strong>
             {% if item.platform %}
-
-                - {{ item.platform }}
-
+                <span style="color:var(--text-muted)"> · {{ item.platform }}</span>
             {% endif %}
-
-            <br>
-
-            Progress: {{ item.progress }}%
-
+            <div style="margin-top:6px;">
+                <div class="progress">
+                    <div class="progress-fill" style="width: {{ item.progress }}%;"></div>
+                </div>
+            </div>
         </div>
-
     {% empty %}
-
-        <p>No learning items yet.</p>
-
+        <div class="empty-state"><p>No learning items yet.</p></div>
     {% endfor %}
-
 </div>
 
 {% endblock %}

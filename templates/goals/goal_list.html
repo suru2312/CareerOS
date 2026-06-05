@@ -1,183 +1,70 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="table-page">
-
     <div class="table-header">
-
-        <h1 class="table-title">
-
-            Goals
-
-        </h1>
-
-        <a
-            href="{% url 'goal_create' %}"
-            class="btn btn-primary">
-
-            Add Goal
-
-        </a>
-
+        <h1 class="table-title">🎯 Goals</h1>
+        <a href="{% url 'goal_create' %}" class="btn btn-primary">+ Add Goal</a>
     </div>
 
     <div class="table-card">
-
         <table class="custom-table">
-
             <thead>
-
                 <tr>
-
                     <th>Title</th>
                     <th>Status</th>
                     <th>Priority</th>
                     <th>Progress</th>
                     <th>Actions</th>
-
                 </tr>
-
             </thead>
-
             <tbody>
-
                 {% for goal in goals %}
-
                 <tr>
-
+                    <td>{{ goal.title }}</td>
                     <td>
-
-                        {{ goal.title }}
-
+                        {% if goal.status == 'pending' %}
+                            <span class="badge badge-pending">Pending</span>
+                        {% elif goal.status == 'in_progress' %}
+                            <span class="badge badge-progress">In Progress</span>
+                        {% else %}
+                            <span class="badge badge-success">Completed</span>
+                        {% endif %}
                     </td>
-
                     <td>
-
-                    {% if goal.status == 'pending' %}
-
-                        <span class="badge badge-pending">
-
-                            Pending
-
-                        </span>
-
-                    {% elif goal.status == 'in_progress' %}
-
-                        <span class="badge badge-progress">
-
-                            In Progress
-
-                        </span>
-
-                    {% else %}
-
-                        <span class="badge badge-success">
-
-                            Completed
-
-                        </span>
-
-                    {% endif %}
-
+                        {% if goal.priority == 'high' %}
+                            <span class="badge badge-danger">High</span>
+                        {% elif goal.priority == 'medium' %}
+                            <span class="badge badge-warning">Medium</span>
+                        {% else %}
+                            <span class="badge badge-success">Low</span>
+                        {% endif %}
                     </td>
-
-                    <td>
-
-                    {% if goal.priority == 'high' %}
-
-                        <span class="badge badge-danger">
-
-                            High
-
-                        </span>
-
-                    {% elif goal.priority == 'medium' %}
-
-                        <span class="badge badge-warning">
-
-                            Medium
-
-                        </span>
-
-                    {% else %}
-
-                        <span class="badge badge-success">
-
-                            Low
-
-                        </span>
-
-                    {% endif %}
-
-                    </td>
-
-                    <td>
-
-                        <div class="progress">
-
-                            <div
-                                class="progress-fill"
-                                style="width: {{ goal.progress }}%;">
-
-                            </div>
-
+                    <td style="min-width:120px;">
+                        <div class="progress" style="margin-bottom:4px;">
+                            <div class="progress-fill" style="width: {{ goal.progress }}%;"></div>
                         </div>
-
-                        <small>
-
-                            {{ goal.progress }}%
-
-                        </small>
-
+                        <small style="color:var(--text-muted)">{{ goal.progress }}%</small>
                     </td>
-
                     <td>
-
                         <div class="actions">
-
-                            <a
-                                href="{% url 'goal_update' goal.id %}"
-                                class="btn btn-primary">
-
-                                Edit
-
-                            </a>
-
-                            <a
-                                href="{% url 'goal_delete' goal.id %}"
-                                class="btn btn-danger">
-
-                                Delete
-
-                            </a>
-
+                            <a href="{% url 'goal_update' goal.id %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'goal_delete' goal.id %}" class="btn btn-danger">Delete</a>
                         </div>
-
                     </td>
-
                 </tr>
-
                 {% empty %}
-
                 <tr>
-
                     <td colspan="5">
-
-                        No goals found.
-
+                        <div class="empty-state">
+                            <h3>No goals yet</h3>
+                            <p>Add your first goal to start tracking.</p>
+                        </div>
                     </td>
-
                 </tr>
-
                 {% endfor %}
-
             </tbody>
-
         </table>
-
     </div>
-
 </div>
-
 {% endblock %}

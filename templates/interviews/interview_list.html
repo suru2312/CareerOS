@@ -1,30 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="table-page">
-
     <div class="table-header">
-
-        <h1 class="table-title">
-            Interviews
-        </h1>
-
-        <a href="{% url 'interview_create' %}"
-           class="btn btn-primary">
-
-            Add Interview
-
-        </a>
-
+        <h1 class="table-title">🎤 Interviews</h1>
+        <a href="{% url 'interview_create' %}" class="btn btn-primary">+ Add Interview</a>
     </div>
 
     <div class="table-card">
-
         <table class="custom-table">
-
             <thead>
-
                 <tr>
                     <th>Company</th>
                     <th>Round</th>
@@ -32,93 +17,41 @@
                     <th>Result</th>
                     <th>Actions</th>
                 </tr>
-
             </thead>
-
             <tbody>
-
                 {% for interview in interviews %}
-
                 <tr>
-
                     <td>{{ interview.company_name }}</td>
-
                     <td>{{ interview.round_name }}</td>
-
-                    <td>{{ interview.interview_date }}</td>
-
+                    <td style="color:var(--text-muted);">{{ interview.interview_date }}</td>
                     <td>
-
                         {% if interview.result == 'selected' %}
-
-                            <span class="badge badge-success">
-                                Selected
-                            </span>
-
+                            <span class="badge badge-success">Selected</span>
                         {% elif interview.result == 'rejected' %}
-
-                            <span class="badge badge-danger">
-                                Rejected
-                            </span>
-
+                            <span class="badge badge-danger">Rejected</span>
                         {% else %}
-
-                            <span class="badge badge-pending">
-                                Pending
-                            </span>
-
+                            <span class="badge badge-pending">Pending</span>
                         {% endif %}
-
                     </td>
-
                     <td>
-
                         <div class="actions">
-
-                            <a href="{% url 'interview_update' interview.id %}"
-                               class="btn btn-primary">
-
-                                Edit
-
-                            </a>
-
-                            <a href="{% url 'interview_delete' interview.id %}"
-                               class="btn btn-danger">
-
-                                Delete
-
-                            </a>
-
+                            <a href="{% url 'interview_update' interview.id %}" class="btn btn-primary">Edit</a>
+                            <a href="{% url 'interview_delete' interview.id %}" class="btn btn-danger">Delete</a>
                         </div>
-
                     </td>
-
                 </tr>
-
                 {% empty %}
-
                 <tr>
-
                     <td colspan="5">
-
                         <div class="empty-state">
-
-                            No interviews found.
-
+                            <h3>No interviews logged</h3>
+                            <p>Add your first interview to start tracking.</p>
                         </div>
-
                     </td>
-
                 </tr>
-
                 {% endfor %}
-
             </tbody>
-
         </table>
-
     </div>
-
 </div>
-
 {% endblock %}

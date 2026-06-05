@@ -1,118 +1,62 @@
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
 
-    <div class="sidebar-logo">
+    <div class="sidebar-logo">🚀 CareerOS</div>
 
-        🚀 CareerOS
-
+    <div class="sidebar-section">
+        <div class="sidebar-heading">Career</div>
+        <div class="sidebar-menu">
+            <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+                <span>🏠</span> Dashboard
+            </a>
+            <a href="{% url 'job_list' %}" class="{% if '/jobs/' in request.path %}active{% endif %}">
+                <span>💼</span> Jobs
+            </a>
+            <a href="{% url 'resume_list' %}" class="{% if '/resumes/' in request.path %}active{% endif %}">
+                <span>📄</span> Resumes
+            </a>
+            <a href="{% url 'interview_list' %}" class="{% if '/interviews/' in request.path %}active{% endif %}">
+                <span>🎤</span> Interviews
+            </a>
+        </div>
     </div>
 
     <div class="sidebar-section">
-
-        <div class="sidebar-heading">
-
-            CAREER
-
-        </div>
-
+        <div class="sidebar-heading">Productivity</div>
         <div class="sidebar-menu">
-
-            <a href="/"
-                class="{% if request.path == '/' %}active{% endif %}">
-                🏠 Dashboard
+            <a href="{% url 'goal_list' %}" class="{% if '/goals/' in request.path %}active{% endif %}">
+                <span>🎯</span> Goals
             </a>
-
-            <a href="{% url 'job_list' %}"
-                class="{% if '/jobs/' in request.path %}active{% endif %}">
-                💼 Jobs
+            <a href="{% url 'learning_list' %}" class="{% if '/learning/' in request.path %}active{% endif %}">
+                <span>📚</span> Learning
             </a>
-
-            <a href="{% url 'resume_list' %}"
-                class="{% if '/resumes/' in request.path %}active{% endif %}">
-                📄 Resumes
-            </a>
-
-            <a href="{% url 'interview_list' %}"
-                class="{% if '/interviews/' in request.path %}active{% endif %}">
-                🎤 Interviews
-            </a>
-
         </div>
-
     </div>
 
     <div class="sidebar-section">
-
-        <div class="sidebar-heading">
-
-            PRODUCTIVITY
-
-        </div>
-
+        <div class="sidebar-heading">Account</div>
         <div class="sidebar-menu">
-
-            <a href="{% url 'goal_list' %}"
-                class="{% if '/goals/' in request.path %}active{% endif %}">
-                🎯 Goals
+            <a href="{% url 'profile_detail' %}" class="{% if '/profile/' in request.path %}active{% endif %}">
+                <span>👤</span> Profile
             </a>
-
-            <a href="{% url 'learning_list' %}"
-                class="{% if '/learning/' in request.path %}active{% endif %}">
-                📚 Learning
-            </a>
-
         </div>
-
-    </div>
-
-    <div class="sidebar-section">
-
-        <div class="sidebar-heading">
-
-            ACCOUNT
-
-        </div>
-
-        <div class="sidebar-menu">
-
-            <a href="{% url 'profile_detail' %}"
-                class="{% if '/profile/' in request.path %}active{% endif %}">
-                👤 Profile
-            </a>
-
-        </div>
-
     </div>
 
     <div class="sidebar-footer">
-
         <div class="user-info">
-
-            <small>Logged in as</small>
-
-            <br>
-
-            <strong>
-                {{ request.user.username }}
-            </strong>
-
+            <div class="user-avatar-placeholder">
+                {{ request.user.username|first|upper }}
+            </div>
+            <div>
+                <small>Logged in as</small>
+                <strong>{{ request.user.username }}</strong>
+            </div>
         </div>
-
-        <form
-            method="POST"
-            action="{% url 'logout' %}">
-
+        <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
-
-            <button
-                class="btn btn-danger"
-                type="submit">
-
+            <button class="btn btn-danger" type="submit" style="width:100%;justify-content:center;">
                 Logout
-
             </button>
-
         </form>
-
     </div>
 
 </div>

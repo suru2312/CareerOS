@@ -1,88 +1,47 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CareerOS</title>
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/variables.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/base.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/layout.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/sidebar.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/forms.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/tables.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/dashboard.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/profile.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/auth.css' %}">
-
-    <link
-        rel="stylesheet"
-        href="{% static 'css/responsive.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 </head>
-
 <body>
 
 <div class="app-layout">
 
     {% if user.is_authenticated %}
-
         {% include 'includes/sidebar.html' %}
-
     {% endif %}
 
     <main class="main-content">
 
-        <button class="menu-toggle">
+        <button class="menu-toggle" id="menuToggle">&#9776; Menu</button>
 
-        ☰ Menu
+        {% block content %}{% endblock %}
 
-        </button>
-
-        {% block content %}
-        {% endblock %}
+        {% include 'includes/footer.html' %}
 
     </main>
 
 </div>
 
+<!-- Mobile sidebar overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/sidebar.js' %}"></script>
 
 </body>
-
 </html>
